@@ -4,7 +4,7 @@
 
 "use strict";
 //External Dependencies
-var Hapi = require("hapi");
+var Hapi = require("@hapi/hapi");
 
 //Internal Dependencies
 var Config = require("./config");

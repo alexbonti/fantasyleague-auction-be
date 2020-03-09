@@ -14,6 +14,7 @@ var adminLogin = {
     tags: ["api", "admin"],
     handler: function (request, h) {
       return new Promise((resolve, reject) => {
+        var payloadData = request.payload;
         if (!UniversalFunctions.verifyEmailFormat(payloadData.emailId)) {
           reject(
             UniversalFunctions.sendError(
@@ -23,7 +24,7 @@ var adminLogin = {
           );
         }
         else {
-          Controller.AdminBaseController.adminLogin(request.payload, function (
+          Controller.AdminBaseController.adminLogin(payloadData, function (
             error,
             data
           ) {
