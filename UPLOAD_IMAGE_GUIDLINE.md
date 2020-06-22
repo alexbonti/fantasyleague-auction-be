@@ -8,6 +8,7 @@ You can get a detailed understanding on the npm [ibm-cos-sdk](https://www.npmjs.
 
 * [Install GraphicsMagick](#grapicsmagick)
 * [Install ImageMagick](#imagemagick)
+* [Install FFmpeg](#ffmpeg)
 * [Setup auto folder structure for upload](#auto_folder)
 * [Setup manual folder structure for upload](#manual_folder)
 
@@ -57,6 +58,26 @@ $ brew install imagemagick
 $ sudo apt-get update
 
 $ sudo apt-get install imagemagick
+
+```
+
+### <a id="ffmpeg"></a>Instal FFmpeg
+
+* Install for Mac OS X
+
+```
+$ brew update
+
+$ brew install ffmpeg
+
+```
+
+* Install for Ubuntu
+
+```
+$ sudo apt-get update
+
+$ sudo snap install ffmpeg
 
 ```
 

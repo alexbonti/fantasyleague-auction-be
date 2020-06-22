@@ -1,6 +1,18 @@
 /**
  * Created by Navit on 15/11/16.
  */
+
+ /**
+ * Please use appLogger for logging in this file try to abstain from console
+ * levels of logging:
+ * - TRACE - ‘blue’
+ * - DEBUG - ‘cyan’
+ * - INFO - ‘green’
+ * - WARN - ‘yellow’
+ * - ERROR - ‘red’
+ * - FATAL - ‘magenta’
+ */
+
 var Service = require("../../services");
 var UniversalFunctions = require("../../utils/universalFunctions");
 var async = require("async");
@@ -815,7 +827,7 @@ var forgetPassword = function (payloadData, callback) {
               if (err) {
                 cb(err);
               } else {
-                console.log("<<<<<<<<<<<<<< created successfully");
+                appLogger.info("<<<<<<<<<<<<<< created successfully");
                 cb();
               }
             }
@@ -923,7 +935,7 @@ var resetPassword = function (payloadData, callbackRoute) {
         var dataToUpdate = {
           password: UniversalFunctions.CryptData(payloadData.password)
         };
-        console.log(dataToUpdate);
+        appLogger.info(dataToUpdate);
         Service.UserService.updateUser(
           { _id: customerId },
           dataToUpdate,

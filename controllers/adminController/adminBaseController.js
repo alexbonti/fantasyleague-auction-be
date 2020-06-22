@@ -1,6 +1,18 @@
 /**
  * Created by Navit on 15/11/16.
  */
+
+  /**
+ * Please use appLogger for logging in this file try to abstain from console
+ * levels of logging:
+ * - TRACE - ‘blue’
+ * - DEBUG - ‘cyan’
+ * - INFO - ‘green’
+ * - WARN - ‘yellow’
+ * - ERROR - ‘red’
+ * - FATAL - ‘magenta’
+ */
+
 var Service = require("../../services");
 var UniversalFunctions = require("../../utils/universalFunctions");
 var async = require("async");

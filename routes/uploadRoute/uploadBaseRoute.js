@@ -51,6 +51,49 @@ var uploadImage =
 }
 
 
+var uploadVideo =
+{
+  method: 'POST',
+  path: '/api/upload/uploadVideo',
+  handler: function (request, reply) {
+    var payloadData = request.payload;
+    return new Promise((resolve, reject) => {
+      Controller.UploadBaseController.uploadVideo(payloadData, function (err, data) {
+        if (err) {
+          reject(UniversalFunctions.sendError(err));
+        } else {
+          resolve(UniversalFunctions.sendSuccess(UniversalFunctions.CONFIG.APP_CONSTANTS.STATUS_MSG.SUCCESS.DEFAULT, data))
+        }
+      });
+    });
+  },
+  config: {
+    description: 'video upload',
+    tags: ['api', 'upload', 'video'],
+    payload: {
+      maxBytes: 207152000,
+      output: 'stream',
+      parse: true,
+      allow: 'multipart/form-data'
+    },
+    validate: {
+      payload: {
+        videoFile: Joi.any()
+          .meta({ swaggerType: 'file' })
+          .required()
+          .description('video file')
+      },
+      failAction: UniversalFunctions.failActionFunction
+    },
+    plugins: {
+      'hapi-swagger': {
+        responseMessages: UniversalFunctions.CONFIG.APP_CONSTANTS.swaggerDefaultResponseMessages
+      }
+    }
+  }
+}
+
+
 var uploadDocument =
 {
   method: 'POST',
@@ -93,5 +136,5 @@ var uploadDocument =
   }
 }
 
-var UploadBaseRoute = [uploadImage, uploadDocument];
+var UploadBaseRoute = [uploadImage, uploadDocument, uploadVideo];
 module.exports = UploadBaseRoute;

@@ -24,7 +24,17 @@ mkdir profilePicture
 
 mkdir docs
 
+mkdir video
+
+mkdir audio
+
 cd profilePicture
+
+mkdir thumb
+
+cd ..
+
+cd video
 
 mkdir thumb
 

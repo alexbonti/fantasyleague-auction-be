@@ -11,8 +11,41 @@ var Config = require("./config");
 var Plugins = require("./plugins");
 var SocketManager = require("./lib/socketManager");
 var Routes = require("./routes");
-var MongoConnect = require('./mongoConnect')
-var BootStrap = require('./utils/bootStrap')
+var MongoConnect = require('./mongoConnect');
+var BootStrap = require('./utils/bootStrap');
+var Path = require("path");
+var log4js = require('log4js');
+
+// Configuration for log4js
+
+log4js.configure({
+  appenders: {
+    App: { type: 'console' },
+    Upload_Manager: { type: 'console' },
+    Socket_Manager: { type: 'console' },
+    Token_Manager: { type: 'console' },
+    Mongo_Manager: { type: 'console' }
+  },
+  categories: {
+    default: { appenders: ['App'], level: 'trace' },
+    Upload_Manager: { appenders: ['Upload_Manager'], level: 'trace' },
+    Socket_Manager: { appenders: ['Socket_Manager'], level: 'trace' },
+    Token_Manager: { appenders: ['Token_Manager'], level: 'trace' },
+    Mongo_Manager: { appenders: ['Mongo_Manager'], level: 'trace' }
+  }
+});
+
+// Global Logger variables for logging
+
+global.appLogger = log4js.getLogger('App');
+global.uploadLogger = log4js.getLogger('Upload_Manager');
+global.socketLogger = log4js.getLogger('Socket_Manager');
+global.tokenLogger = log4js.getLogger('Token_Manager');
+global.mongoLogger = log4js.getLogger('Mongo_Manager');
+
+// Global variable to get app root folder path
+
+global.appRoot = Path.resolve(__dirname)
 
 const init = async () => {
   //Create Server
@@ -56,29 +89,29 @@ const init = async () => {
   SocketManager.connectSocket(server);
 
   BootStrap.bootstrapAdmin(function(err){
-    if(err) console.log(err)
+    if(err) appLogger.debug(err)
   });
 
-  server.events.on("response", function(request) {
-    console.log(
+  server.events.on("response", function (request) {
+    appLogger.info(
       request.info.remoteAddress +
-        ": " +
-        request.method.toUpperCase() +
-        " " +
-        request.url.pathname +
-        " --> " +
-        request.response.statusCode
+      ": " +
+      request.method.toUpperCase() +
+      " " +
+      request.url.pathname +
+      " --> " +
+      request.response.statusCode
     );
-    console.log("Request payload:", request.payload);
+    appLogger.info("Request payload:", request.payload);
   });
 
   // Start Server
   await server.start();
-  console.log("Server running on %s", server.info.uri);
+  appLogger.info("Server running on %s", server.info.uri);
 };
 
 process.on("unhandledRejection", err => {
-  console.log(err);
+  appLogger.fatal(err);
   process.exit(1);
 });
 

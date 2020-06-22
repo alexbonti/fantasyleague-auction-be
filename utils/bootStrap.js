@@ -1,3 +1,15 @@
+
+/**
+ * Please use appLogger for logging in this file try to abstain from console
+ * levels of logging:
+ * - TRACE - ‘blue’
+ * - DEBUG - ‘cyan’
+ * - INFO - ‘green’
+ * - WARN - ‘yellow’
+ * - ERROR - ‘red’
+ * - FATAL - ‘magenta’
+ */
+
 var async = require('async');
 var Config = require('../config');
 var UniversalFunctions = require('./universalFunctions');
@@ -58,11 +70,11 @@ function insertData(adminData, callbackParent) {
             if(!_skip){
                 Service.AdminService.createAdmin(adminData, function (err, response) {
                     if(err){
-                        console.log("Implementation err",err);
+                        appLogger.debug("Implementation err",err);
                         cb(err)
                     }
                     else{
-                        console.log("Admin Added Succesfully");
+                        appLogger.info("Admin Added Succesfully");
                         cb()
                     }
                 });
