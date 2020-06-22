@@ -63,6 +63,8 @@ $ sudo apt-get install imagemagick
 
 ### <a id="ffmpeg"></a>Instal FFmpeg
 
+Preffer installing version 3.* as version 4.* currently gives issues.
+
 * Install for Mac OS X
 
 ```
@@ -77,7 +79,7 @@ $ brew install ffmpeg
 ```
 $ sudo apt-get update
 
-$ sudo snap install ffmpeg
+$ sudo apt-get install ffmpeg
 
 ```
 
